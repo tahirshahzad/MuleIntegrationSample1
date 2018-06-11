@@ -11,9 +11,9 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
     <db:mysql-config name="MySQL_Configuration" host="mudb.mulesoft-training.com" port="3306" user="mule" password="mule" database="training" doc:name="MySQL Configuration"/>
     <flow name="muleintegrationsample1Flow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/sample" doc:name="HTTP" allowedMethods="GET"/>
-        <db:select config-ref="MySQL_Configuration" doc:name="Database">
+        <db:insert config-ref="MySQL_Configuration" doc:name="Database">
             <db:parameterized-query><![CDATA[Select FlightID from Flights where FlightID = #[payload]]]></db:parameterized-query>
-        </db:select>
+        </db:insert>
         <set-payload doc:name="Set Payload" value="#[payload[0].FlightID]"/>
     </flow>
 </mule>
